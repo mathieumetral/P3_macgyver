@@ -6,6 +6,7 @@ class Object(pygame.sprite.Sprite):
         super().__init__()
 
         self.image = image[0]
+        self.image_original = None
         self.size = size
         self._update_image_size()
         self.rect = self.image.get_rect()
@@ -48,3 +49,14 @@ class Object(pygame.sprite.Sprite):
 
     def draw(self, screen):
         screen.blit(self.image, self.rect)
+
+    def remove(self):
+        self.image_original = self.image
+        self.image = self.image.convert()
+        self.image.fill((0, 0, 0, 0))
+        self.hide = True
+
+    def show(self):
+        if self.image_original is not None:
+            self.image = self.image_original
+            self.hide = False
