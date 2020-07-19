@@ -1,4 +1,4 @@
-![Logo of the project](./src/assets/images/logo.png)
+![Logo of the project](assets/images/logo.png)
 
 # Help MacGyver escape! &middot; [![GitHub license](https://img.shields.io/badge/license-MIT-blue.svg?style=flat-square)](https://github.com/mathieumetral/P3_macgyver/blob/master/LICENSE)
 > This is project no. 3 of the diploma paths "Application developer - Python"
