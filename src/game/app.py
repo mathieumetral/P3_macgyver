@@ -25,11 +25,17 @@ class MacGyverGame:
             Resource.load_image(constants.MAZE_PLAYER_IMAGE),
             Resource.load_image_at(constants.MAZE_WALL_IMAGE, (39, 0, cells_size[0], cells_size[1])),
             Resource.load_image_at(constants.MAZE_WALL_IMAGE, (319, 39, cells_size[0], cells_size[1])),
-            Resource.load_image(constants.MAZE_GUARDIAN_IMAGE)
+            Resource.load_image(constants.MAZE_GUARDIAN_IMAGE),
+            [
+                Resource.load_image(constants.MAZE_TOOLS_NEEDLE_IMAGE),
+                Resource.load_image(constants.MAZE_TOOLS_ETHER_IMAGE),
+                Resource.load_image(constants.MAZE_TOOLS_PLASTIC_TUBE_IMAGE)
+            ]
         )
 
         # RenderPlain allows you to manage multiple Sprite objects
         self.player_sprite = pygame.sprite.RenderPlain(self.maze.player)
+        self.tools_sprite = pygame.sprite.RenderPlain(self.maze.tools)
 
     def draw(self):
         self.maze.generate("assets/levels/1")  # Load level 1
@@ -55,6 +61,7 @@ class MacGyverGame:
             self.screen.blit(self.background, self.maze.player.rect, self.maze.player.rect)
 
             self.player_sprite.update()  # Call the update method of every member sprite
+            self.tools_sprite.draw(self.screen)
             self.player_sprite.draw(self.screen)
 
             # Update the full display Surface to the screen

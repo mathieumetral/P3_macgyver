@@ -16,3 +16,6 @@ MAZE_WALL_CHARACTER = "#"
 MAZE_WALL_IMAGE = os.path.join(IMAGES_DIR, "floor.jpg")
 MAZE_PLAYER_IMAGE = os.path.join(IMAGES_DIR, "player.png")
 MAZE_GUARDIAN_IMAGE = os.path.join(IMAGES_DIR, "guardian.png")
+MAZE_TOOLS_NEEDLE_IMAGE = os.path.join(IMAGES_DIR, "needle.png")
+MAZE_TOOLS_ETHER_IMAGE = os.path.join(IMAGES_DIR, "ether.png")
+MAZE_TOOLS_PLASTIC_TUBE_IMAGE = os.path.join(IMAGES_DIR, "plastic_tube.png")
