@@ -14,3 +14,5 @@ MAZE_START_CHARACTER = "s"
 MAZE_END_CHARACTER = "e"
 MAZE_WALL_CHARACTER = "#"
 MAZE_WALL_IMAGE = os.path.join(IMAGES_DIR, "floor.jpg")
+MAZE_PLAYER_IMAGE = os.path.join(IMAGES_DIR, "player.png")
+MAZE_GUARDIAN_IMAGE = os.path.join(IMAGES_DIR, "guardian.png")

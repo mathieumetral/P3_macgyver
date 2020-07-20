@@ -1,5 +1,7 @@
 import pygame
 
+from config import constants
+from src.game.maze.maze import Maze
 from src.utils.resource import Resource
 
 
@@ -18,8 +20,27 @@ class MacGyverGame:
         self.clock = pygame.time.Clock()  # Clock initialization
         self.running = False
 
+        self.maze = Maze(
+            cells_size,
+            Resource.load_image(constants.MAZE_PLAYER_IMAGE),
+            Resource.load_image_at(constants.MAZE_WALL_IMAGE, (39, 0, cells_size[0], cells_size[1])),
+            Resource.load_image_at(constants.MAZE_WALL_IMAGE, (319, 39, cells_size[0], cells_size[1])),
+            Resource.load_image(constants.MAZE_GUARDIAN_IMAGE)
+        )
+
+        # RenderPlain allows you to manage multiple Sprite objects
+        self.player_sprite = pygame.sprite.RenderPlain(self.maze.player)
+
+    def draw(self):
+        self.maze.generate("assets/levels/1")  # Load level 1
+        self.maze.draw(self.background)
+        self.screen.blit(self.background, (0, 0))
+
+        pygame.display.flip()  # Update the Surface
+
     def start(self):
         self.running = True
+        self.draw()
 
         while self.running:
             # Make sure the game does not run at more than 60 FPS
@@ -28,6 +49,13 @@ class MacGyverGame:
             for event in pygame.event.get():
                 if event.type == pygame.QUIT:
                     return self.stop()
+
+                self.maze.events(event)
+
+            self.screen.blit(self.background, self.maze.player.rect, self.maze.player.rect)
+
+            self.player_sprite.update()  # Call the update method of every member sprite
+            self.player_sprite.draw(self.screen)
 
             # Update the full display Surface to the screen
             pygame.display.flip()
