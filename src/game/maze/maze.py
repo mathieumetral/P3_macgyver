@@ -2,10 +2,11 @@ import pygame
 
 from config import constants
 from src.game.maze.cell import Cell
+from src.game.maze.player import Player
 
 
 class Maze:
-    def __init__(self, cells_size: tuple,  wall_image, start_image, end_image):
+    def __init__(self, cells_size: tuple, player_image, wall_image, start_image, end_image):
         size = pygame.display.get_window_size()
         self.width, self.height = size[0] // cells_size[0], size[1] // cells_size[1]
         self.grid = [[Cell(x, y, cells_size) for y in range(self.height)] for x in range(self.width)]
@@ -14,6 +15,10 @@ class Maze:
         self.end_image = end_image
         self.level_file = None
         self.finish = False
+
+        self.tools = []
+
+        self.player = Player(player_image, cells_size, self.grid, self.tools)
 
     def generate(self, level_file):
         line_num, row_num = 0, 0
@@ -26,6 +31,7 @@ class Maze:
                         self.grid[row_num][line_num].create_wall(self.wall_image)
                     elif char == constants.MAZE_START_CHARACTER:
                         self.grid[row_num][line_num].create_start(self.start_image)
+                        self.player.move_to((row_num, line_num))
                     elif char == constants.MAZE_END_CHARACTER:
                         self.grid[row_num][line_num].create_end(self.end_image)
 
@@ -36,3 +42,6 @@ class Maze:
         for line in self.grid:
             for cell in line:
                 cell.draw(screen)
+
+    def events(self, event):
+        self.player.events(event)
