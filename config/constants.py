@@ -10,3 +10,7 @@ WIN_ICON = os.path.join(IMAGES_DIR, "logo.png")
 
 MAZE_CELLS_NUMBER = (15, 15)
 MAZE_CELLS_SIZE = (40, 40)
+MAZE_START_CHARACTER = "s"
+MAZE_END_CHARACTER = "e"
+MAZE_WALL_CHARACTER = "#"
+MAZE_WALL_IMAGE = os.path.join(IMAGES_DIR, "floor.jpg")
