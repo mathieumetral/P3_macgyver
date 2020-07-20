@@ -6,6 +6,7 @@ from config import constants
 from src.game.maze.cell import Cell
 from src.game.maze.player import Player
 from src.game.object import Object
+from src.utils.resource import Resource
 
 
 class Maze:
@@ -61,3 +62,18 @@ class Maze:
 
     def events(self, event):
         self.player.events(event)
+
+    def display_screen(self, screen):
+        if self.player.status == 0 or self.finish:
+            return
+
+        font = pygame.font.SysFont('Comic Sans MS', 30)
+        title = font.render('You win!' if self.player.status == 1 else 'You lose!', False, (255, 255, 255))
+        size = title.get_size()
+        menu = Resource.get_surface((size[0] + 20, size[1] + 20), (0, 0, 0))[0]
+        menu_rect = menu.get_rect(center=screen.get_rect().center)
+
+        menu.blit(title, (10, 10))
+
+        screen.blit(menu, menu_rect)
+        self.finish = True

@@ -64,6 +64,8 @@ class MacGyverGame:
             self.tools_sprite.draw(self.screen)
             self.player_sprite.draw(self.screen)
 
+            self.maze.display_screen(self.screen)
+
             # Update the full display Surface to the screen
             pygame.display.flip()
 
